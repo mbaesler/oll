@@ -117,7 +117,7 @@ requestCurrencies = () ->
               return if e?
 
               async.eachSeries results, (currency, cb) ->
-                try pusher.trigger "private-#{currency._key}", 'currency-peak', { message: "Cuxrrency #{currency._key} new peak at #{currency.rate}" }
+                try pusher.trigger "private-#{currency._key}", 'currency-peak', { message: "Currency #{currency._key} new peak at #{currency.rate}" }
                 cb()
 
 

@@ -182,7 +182,7 @@ requestCurrencies = function() {
               return async.eachSeries(results, function(currency, cb) {
                 try {
                   pusher.trigger("private-" + currency._key, 'currency-peak', {
-                    message: "Cuxrrency " + currency._key + " new peak at " + currency.rate
+                    message: "Currency " + currency._key + " new peak at " + currency.rate
                   });
                 } catch (undefined) {}
                 return cb();
