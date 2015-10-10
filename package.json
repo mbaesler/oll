@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "arangojs": "^3.9.1",
+    "async": "^1.4.2",
+    "express": "^4.13.3",
+    "moment": "^2.10.6",
+    "pusher": "^1.0.6",
+    "request": "^2.64.0"
+  }
+}
