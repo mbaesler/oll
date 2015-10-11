@@ -73,13 +73,14 @@ app.get '/api/:userid', (req, res) ->
 app.listen 8080
 
 
-timeoutRequest = () -> setTimout requestCurrencies, (60 - Number moment().format 'm') * 60 * 1000
+timeoutRequest = () -> setTimeout requestCurrencies, (60 - Number moment().format 'm') * 60 * 1000
 
-request = (a, cb) ->
-  cb null, {}, '{"Outcome":"Success","Message":null,"Identity":"Request","Delay":0.0083031,"Lines":[{"BaseCurrency":"EUR","Columns":[{"QuoteCurrency":"EUR","Rate":1.0},{"QuoteCurrency":"USD","Rate":1.137925},{"QuoteCurrency":"AUD","Rate":1.5641},{"QuoteCurrency":"JPY","Rate":135.2875}]},{"BaseCurrency":"USD","Columns":[{"QuoteCurrency":"EUR","Rate":0.886584},{"QuoteCurrency":"USD","Rate":1.0},{"QuoteCurrency":"AUD","Rate":1.386578},{"QuoteCurrency":"JPY","Rate":119.96}]},{"BaseCurrency":"AUD","Columns":[{"QuoteCurrency":"EUR","Rate":0.639345},{"QuoteCurrency":"USD","Rate":0.7212},{"QuoteCurrency":"AUD","Rate":1.0},{"QuoteCurrency":"JPY","Rate":86.525}]},{"BaseCurrency":"JPY","Columns":[{"QuoteCurrency":"EUR","Rate":0.00739167},{"QuoteCurrency":"USD","Rate":0.00833611},{"QuoteCurrency":"AUD","Rate":0.0115574},{"QuoteCurrency":"JPY","Rate":1.0}]}]}'
+# request = (a, cb) ->
+#   cb null, {}, '{"Outcome":"Success","Message":null,"Identity":"Request","Delay":0.0083031,"Lines":[{"BaseCurrency":"EUR","Columns":[{"QuoteCurrency":"EUR","Rate":1.0},{"QuoteCurrency":"USD","Rate":1.137925},{"QuoteCurrency":"AUD","Rate":1.5641},{"QuoteCurrency":"JPY","Rate":135.2875}]},{"BaseCurrency":"USD","Columns":[{"QuoteCurrency":"EUR","Rate":0.886584},{"QuoteCurrency":"USD","Rate":1.0},{"QuoteCurrency":"AUD","Rate":1.386578},{"QuoteCurrency":"JPY","Rate":119.96}]},{"BaseCurrency":"AUD","Columns":[{"QuoteCurrency":"EUR","Rate":0.639345},{"QuoteCurrency":"USD","Rate":0.7212},{"QuoteCurrency":"AUD","Rate":1.0},{"QuoteCurrency":"JPY","Rate":86.525}]},{"BaseCurrency":"JPY","Columns":[{"QuoteCurrency":"EUR","Rate":0.00739167},{"QuoteCurrency":"USD","Rate":0.00833611},{"QuoteCurrency":"AUD","Rate":0.0115574},{"QuoteCurrency":"JPY","Rate":1.0}]}]}'
 
 
 requestCurrencies = () ->
+  timeoutRequest()
   db.query 'return unique(flatten(for u in users filter not_null(u.currencies) return u.currencies))', (e, cursor) ->
     return if e?
 
